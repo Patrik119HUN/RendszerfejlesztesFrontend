@@ -1,0 +1,70 @@
+.floating-action-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.warehouse-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.warehouse-card {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.menu-icon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.warehouse-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.warehouse-title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.warehouse-title p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: grey;
+}
+
+.warehouse-data p {
+  margin: 5px 0;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+mat-card-header {
+  padding: 0;
+}
+
+mat-card-actions {
+  text-align: center;
+}
+
+mat-icon {
+  font-size: 24px;
+}
+

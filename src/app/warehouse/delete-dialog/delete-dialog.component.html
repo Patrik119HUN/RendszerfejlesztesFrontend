@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Törlés megerősítése</h2>
+
+<mat-dialog-content>
+  <p>Biztos vagy benne, hogy ki akarod törölni "{{ data.name }}" telephelyet?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="true" color="warn">Törlés</button>
+  <button mat-raised-button [mat-dialog-close]="false">Mégse</button>
+</mat-dialog-actions>

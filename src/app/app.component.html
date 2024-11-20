@@ -1,0 +1,32 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <h2>Telephely neve</h2>
+  <span class="spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="share icon">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="drawer">
+  <mat-drawer #sidenav>
+    <mat-list>
+      <a mat-list-item routerLink="/warehouse"> Telephely </a>
+      <a mat-list-item routerLink="/inventory"> Árukészlet </a>
+      <a mat-list-item routerLink="/transport"> Fuvarozás </a>
+      <a mat-list-item routerLink="/schedule"> Beosztás </a>
+      <a mat-list-item routerLink="/statistics"> Statisztika </a>
+      <a mat-list-item routerLink="/settings"> Beállítások </a>
+      <a mat-list-item (click)="logout()"> Kijelentkezés </a>
+      <a mat-list-item routerLink="/login"> Bejelentkezés </a>
+      <a mat-list-item routerLink="/registercompany"> Cég regisztráció </a>
+      <a mat-list-item routerLink="/register"> Regisztráció </a>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

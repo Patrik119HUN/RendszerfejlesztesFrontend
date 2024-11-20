@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="card">
+    <h3>Cég regisztráció</h3>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="d-flex flex-column w-100">
+      <!-- Vezetéknév és Keresztnév mezők egymás mellett -->
+      <div class="row">
+        <mat-form-field class="col">
+          <mat-label>Vezetéknév</mat-label>
+          <input matInput formControlName="lastName" type="text" required />
+          @if (lastName?.hasError('required')) {
+          <mat-error> A vezetéknév megadása kötelező </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>Keresztnév</mat-label>
+          <input matInput formControlName="firstName" type="text" required />
+          @if (firstName?.hasError('required')) {
+          <mat-error> A keresztnév megadása kötelező </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Email mező -->
+      <mat-form-field class="w-100">
+        <mat-label>Email cím</mat-label>
+        <input matInput formControlName="email" type="email" required />
+        @if (email?.hasError('required')) {
+        <mat-error> Az email megadása kötelező </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Jelszó mező -->
+      <mat-form-field class="w-100">
+        <mat-label>Jelszó</mat-label>
+        <input matInput formControlName="password" type="password" required />
+        @if (password?.hasError('required')) {
+        <mat-error> A jelszó megadása kötelező </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Céghez kapcsolódó mezők -->
+      <div>
+        <!-- Cég neve mező -->
+        <mat-form-field class="w-100">
+          <mat-label>Cég neve</mat-label>
+          <input matInput formControlName="companyName" type="text" />
+          @if (companyName?.hasError('required')) {
+          <mat-error> A cég név megadása kötelező </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Irányítószám és Város mezők egymás mellett -->
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-label>Irányítószám</mat-label>
+            <input matInput formControlName="postalCode" type="text" />
+            @if (postalCode?.hasError('required')) {
+            <mat-error> Az irányítószám megadása kötelező </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>Város</mat-label>
+            <input matInput formControlName="city" type="text" />
+            @if (city?.hasError('required')) {
+            <mat-error> A város megadása kötelező </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Utca és Házszám mezők egymás mellett -->
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-label>Utca</mat-label>
+            <input matInput formControlName="street" type="text" />
+            @if (street?.hasError('required')) {
+            <mat-error> Az utca név megadása kötelező </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>Házszám</mat-label>
+            <input matInput formControlName="houseNumber" type="text" />
+            @if (houseNumber?.hasError('required')) {
+            <mat-error> A házszám megadása kötelező </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Regisztráció gomb -->
+      <button mat-raised-button color="primary" style="align-content: center; width: 100%" type="submit" [disabled]="registerForm.invalid">
+        Regisztráció
+      </button>
+    </form>
+  </div>
+</div>

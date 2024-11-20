@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="card">
+    <h3>Regisztráció</h3>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="d-flex flex-column w-100">
+      <!-- Vezetéknév és Keresztnév mező -->
+      <div class="row">
+        <mat-form-field class="col">
+          <mat-label>Vezetéknév</mat-label>
+          <input matInput formControlName="lastName" type="text" required />
+          @if (lastName?.hasError('required')) {
+          <mat-error> A vezetéknév megadása kötelező </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>Keresztnév</mat-label>
+          <input matInput formControlName="firstName" type="text" required />
+          @if (firstName?.hasError('required')) {
+          <mat-error> A keresztnév megadása kötelező </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Email mező -->
+      <mat-form-field class="w-100">
+        <mat-label>Email cím</mat-label>
+        <input matInput formControlName="email" type="email" required />
+        @if (email?.hasError('required')) {
+        <mat-error> Az e-mail megadása kötelező </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Jelszó mező -->
+      <mat-form-field class="w-100">
+        <mat-label>Jelszó</mat-label>
+        <input matInput formControlName="password" type="password" required />
+        @if (email?.hasError('required')) {
+        <mat-error> Az jelszó megadása kötelező </mat-error>
+        }
+      </mat-form-field>
+      <br />
+
+      <!-- Regisztráció gomb -->
+      <button mat-raised-button color="primary" style="align-content: center; width: 100%" type="submit" [disabled]="registerForm.invalid">
+        Regisztráció
+      </button>
+    </form>
+  </div>
+</div>

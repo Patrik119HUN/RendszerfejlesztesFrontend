@@ -1,0 +1,55 @@
+<div class="container">
+  <!-- Középre igazított tartalom -->
+  <div class="text-center">
+    <h2>Statisztika</h2>
+    <h4>Város</h4>
+
+    <!-- Városok chip-ek -->
+    <div class="d-flex justify-content-center mb-4">
+      <mat-chip-set>
+        @for (city of cities; track $index) {
+        <mat-chip
+          (click)="toggleCitySelection(city)"
+          [class.selected-chip]="city.selected"
+          color="primary"
+          class="mx-1"
+        >
+          @if (city.selected) {
+          <mat-icon class="me-1">check</mat-icon>
+          }
+          {{ city.name }}
+        </mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+
+    <!-- <hr> elválasztó -->
+    <hr class="my-4" />
+
+    <!-- Statisztika sorok -->
+    @for ( stat of filteredStats; track stat) {
+    <div class="row align-items-center mb-3 p-2 border-bottom">
+      <!-- Progress spinner -->
+      <div class="col-auto">
+        <mat-progress-spinner
+          mode="determinate"
+          [value]="stat.percentage"
+          diameter="40"
+          color="primary"
+        ></mat-progress-spinner>
+      </div>
+
+      <!-- Város részletek -->
+      <div class="col">
+        <h5 class="mb-1">{{ stat.city }}</h5>
+        <p class="mb-0 text-muted">{{ stat.address }}</p>
+      </div>
+
+      <!-- Vásárlók -->
+      <div class="col-auto">
+        <p class="mb-0 fw-bold">{{ stat.customers }} vásárló</p>
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,39 @@
+
+<h3>Telephelyek</h3>
+
+
+<div class="warehouse-list">
+  @for (warehouse of warehouses | async; track warehouse) {
+    <mat-card class="warehouse-card">
+    <div class="menu-icon">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editWarehouse(warehouse)">Szerkesztés</button>
+        <button mat-menu-item (click)="deleteWarehouse(warehouse)">Törlés</button>
+      </mat-menu>
+    </div>
+    <mat-card-content class="warehouse-info">
+      <div class="warehouse-title">
+        <h3>{{ warehouse.name }}</h3>
+          <p>{{ warehouse.address.city }}</p>
+          <p>{{ warehouse.address.street }} {{warehouse.address.number}}</p>
+        </div>
+        <div class="warehouse-data">
+          <p><strong>Kapacitás:</strong> {{ warehouse.capacity }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
+
+
+
+
+<button mat-fab [matMenuTriggerFor]="menu" class="floating-action-button">
+  <mat-icon>edit</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="addWarehouse()">Telephely hozzáadása</button>
+</mat-menu>

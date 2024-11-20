@@ -1,0 +1,44 @@
+<div class="container">
+  <div>
+    <h2>Termékek Listája</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Termék Név</th>
+          <th>Ár (Ft)</th>
+          <th>Darab</th>
+          <th>Leírás</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of $items | async; track $index) {
+        <tr>
+          <td>{{ product.item.name }}</td>
+          <td>{{ product.item.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.item.price }}</td>
+
+          <td>
+            <button mat-flat-button>Szerkesztés</button>
+          </td>
+          <td>
+            <button mat-raised-button>Törlés</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="fixed bottom-4 right-10">
+  <button mat-fab [mat-menu-trigger-for]="menu">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-menu #menu>
+    <button mat-menu-item>
+      <mat-icon>add</mat-icon>
+      <a mat-list-item routerLink="/additem"> <span> Tárgy felvétele </span> </a>
+    </button>
+  </mat-menu>
+</div>

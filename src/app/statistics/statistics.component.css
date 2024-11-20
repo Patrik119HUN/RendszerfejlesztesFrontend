@@ -1,0 +1,36 @@
+/* Középre igazítás az egész oldalra */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* <hr> elválasztó stílus */
+hr {
+  border: 1px solid #ccc;
+  width: 80%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* Stílus a statisztika sorokhoz */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.col-auto {
+  flex-shrink: 0;
+}
+
+/* Kiválasztott chip stílus */
+.selected-chip {
+  background-color: #e0e0e0 !important; /* Világos szürke háttér */
+  color: #000 !important; /* Fekete szöveg szín */
+}
+
