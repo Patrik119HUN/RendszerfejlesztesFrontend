@@ -22,7 +22,7 @@ export class LoginComponent {
 
   public constructor(private readonly auth: AuthService, private readonly router: Router) {
     this.loginForm = new FormGroup<LoginForm>({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
-import { WarehouseService } from './service/warehouse.service';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
@@ -11,23 +10,42 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { WarehouseDialogComponent } from './warehouse-dialog/warehouse-dialog.component';
 import { Observable } from 'rxjs';
 import { IWarehouse } from '../shared/model/warehouse';
+import {WarehouseService} from "../shared/services/warehouse.service";
 
 @Component({
   selector: 'app-warehouse',
   standalone: true,
-  imports: [MatFabButton, MatMenu, MatMenuTrigger, MatMenuItem, MatIcon, MatCard, MatCardContent, MatIconButton, AsyncPipe],
+  imports: [
+    MatFabButton,
+    MatMenu,
+    MatMenuTrigger,
+    MatMenuItem,
+    MatIcon,
+    MatCard,
+    MatCardContent,
+    MatIconButton,
+    AsyncPipe,
+  ],
   templateUrl: './warehouse.component.html',
   styleUrl: './warehouse.component.css',
 })
 export class WarehouseComponent {
   public warehouses: Observable<IWarehouse[]>;
 
-  public constructor(private warehouseService: WarehouseService, private router: Router, private dialog: MatDialog) {
-    this.warehouses = this.warehouseService.getAllWarehouses();
+  public constructor(
+    private warehouseService: WarehouseService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    this.warehouses = this.warehouseService.getUserWarehouses();
   }
 
   public loadWarehouses(): Observable<IWarehouse[]> {
-    return this.warehouseService.getAllWarehouses();
+    return this.warehouseService.getUserWarehouses();
+  }
+
+  public listItems(warehouse: IWarehouse): void {
+    this.router.navigate([`/inventory/${warehouse.id}`]);
   }
 
   public editWarehouse(warehouse: IWarehouse): void {

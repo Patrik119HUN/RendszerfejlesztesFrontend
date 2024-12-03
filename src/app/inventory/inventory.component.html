@@ -1,34 +1,36 @@
+<h3 class="pl-5">Termékek Listája</h3>
 <div class="container">
-  <div>
-    <h2>Termékek Listája</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Termék Név</th>
-          <th>Ár (Ft)</th>
-          <th>Darab</th>
-          <th>Leírás</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (product of $items | async; track $index) {
-        <tr>
-          <td>{{ product.item.name }}</td>
-          <td>{{ product.item.price }}</td>
-          <td>{{ product.quantity }}</td>
-          <td>{{ product.item.price }}</td>
-
-          <td>
-            <button mat-flat-button>Szerkesztés</button>
-          </td>
-          <td>
-            <button mat-raised-button>Törlés</button>
-          </td>
-        </tr>
+  <table>
+    <thead>
+      <tr>
+        <th>Termék Név</th>
+        <th>Ár (Ft)</th>
+        @if(this.inventoryType === 'warehouse') {
+        <th>Darab</th>
         }
-      </tbody>
-    </table>
-  </div>
+        <th>Leírás</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of inventory$ | async; track $index) {
+      <tr>
+        <td>{{ product.item.name }}</td>
+        <td>{{ product.item.price }}</td>
+        @if(this.inventoryType === 'warehouse') {
+        <td>{{ product.quantity }}</td>
+        }
+        <td>{{ product.item.description }}</td>
+
+        <td>
+          <button mat-flat-button (click)="editProduct(product)">Szerkesztés</button>
+        </td>
+        <td>
+          <button mat-raised-button (click)="deleteProduct(product)">Törlés</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>
 
 <div class="fixed bottom-4 right-10">
@@ -38,7 +40,13 @@
   <mat-menu #menu>
     <button mat-menu-item>
       <mat-icon>add</mat-icon>
-      <a mat-list-item routerLink="/additem"> <span> Tárgy felvétele </span> </a>
+      <a mat-list-item (click)="createItem()"> <span> Tárgy felvétele </span> </a>
     </button>
+    @if(this.inventoryType === 'warehouse') {
+    <button mat-menu-item>
+      <mat-icon>add</mat-icon>
+      <a mat-list-item (click)="addItemToWarehouse()"> <span> Tárgy hozzáadasa raktárhoz</span> </a>
+    </button>
+    }
   </mat-menu>
 </div>

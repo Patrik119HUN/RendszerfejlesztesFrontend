@@ -1,0 +1,36 @@
+<h3 mat-dialog-title>Termék felvétele</h3>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="flex-column justify-content-center align-items-center">
+    <div>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Termék </mat-label>
+        <input matInput placeholder="Add meg a termék nevét" formControlName="name" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Ár (HUF)</mat-label>
+        <input matInput type="number" placeholder="Add meg a termék árát" formControlName="price" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Leírás</mat-label>
+        <textarea
+          matInput
+          placeholder="Add meg a termék leírását"
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Mégse</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+      Mentés
+    </button>
+  </mat-dialog-actions>
+</form>

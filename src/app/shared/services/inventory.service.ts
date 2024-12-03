@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IInventory } from '../../shared/model/inventory';
+import { IInventory } from '../model/inventory';
+import { IProductWithQuantity } from '../model/product-with-quantity';
+
+export interface IInventoryRequest {
+  warehouseId: number;
+  itemId: number;
+  quantity: number;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventoryService {
-  private apiUrl = '/api/v1/inventories';
+  private apiUrl = '/api/v1/inventory';
 
   public constructor(private readonly http: HttpClient) {}
 
@@ -19,15 +26,16 @@ export class InventoryService {
     return this.http.get<IInventory>(`${this.apiUrl}/${id}`);
   }
 
-  public createInventory(inventory: IInventory): Observable<IInventory> {
-    return this.http.post<IInventory>(this.apiUrl, inventory);
+  public addItemToWarehouse(inventory: IInventoryRequest): Observable<IInventoryRequest> {
+    return this.http.post<IInventoryRequest>(this.apiUrl, inventory);
   }
 
-  public updateInventory(inventory: IInventory): Observable<IInventory> {
-    return this.http.put<IInventory>(this.apiUrl, inventory);
+  public updateInventory(inventory: IProductWithQuantity): Observable<IProductWithQuantity> {
+    return this.http.put<IProductWithQuantity>(this.apiUrl, inventory);
   }
 
   public deleteInventory(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
 }

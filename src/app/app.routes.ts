@@ -1,27 +1,59 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { InventoryComponent } from './inventory/inventory.component';
-import { SettingsComponent } from './settings/settings.component';
-import { TransportComponent } from './transport/transport.component';
-import { RegisterComponent } from './auth/register/register.component';
+
 //import {AdditemComponent} from "./additem/additem.component";
-import { WarehouseComponent } from "./warehouse/warehouse.component";
-import {StatisticsComponent} from "./statistics/statistics.component";
-import {ScheduleComponent} from "./schedule/schedule.component";
-import { RegistercompanyComponent } from './auth/registercompany/registercompany.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'registercompany', component: RegistercompanyComponent },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'transport', component: TransportComponent },
- // { path: 'additem', component: AdditemComponent },
+  {
+    path: 'login',
+    loadComponent: () => import('./auth/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./auth/register/register.component').then((m) => m.RegisterComponent),
+  },
+  {
+    path: 'registercompany',
+    loadComponent: () =>
+      import('./auth/registercompany/registercompany.component').then(
+        (m) => m.RegistercompanyComponent
+      ),
+  },
+  {
+    path: 'inventory/:id',
+    loadComponent: () =>
+      import('./inventory/inventory.component').then((m) => m.InventoryComponent),
+  },
+  {
+    path: 'inventory',
+    loadComponent: () =>
+      import('./inventory/inventory.component').then((m) => m.InventoryComponent),
+  },
+  {
+    path: 'transport',
+    loadComponent: () =>
+      import('./transport/transport.component').then((m) => m.TransportComponent),
+  },
+  // { path: 'additem', component: AdditemComponent },
 
-  { path: 'statistics', component: StatisticsComponent },
-  { path: 'schedule', component: ScheduleComponent },
-  { path: 'settings', component: SettingsComponent },
+  {
+    path: 'statistics',
+    loadComponent: () =>
+      import('./statistics/statistics.component').then((m) => m.StatisticsComponent),
+  },
+  {
+    path: 'schedule',
+    loadComponent: () => import('./schedule/schedule.component').then((m) => m.ScheduleComponent),
+  },
+  {
+    path: 'settings',
+    loadComponent: () => import('./settings/settings.component').then((m) => m.SettingsComponent),
+  },
   //{ path: 'logout', component: LogoutComponent },
-  { path: 'warehouse', component: WarehouseComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  {
+    path: 'warehouse',
+    loadComponent: () =>
+      import('./warehouse/warehouse.component').then((m) => m.WarehouseComponent),
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

@@ -54,6 +54,7 @@ export class WarehouseDialogComponent {
         id: this.data.warehouse?.id || 0,
         name: formData.name,
         capacity: formData.capacity,
+        items: [],
         address: {
           id: this.data.warehouse?.address?.id || 0,
           country: formData.country,

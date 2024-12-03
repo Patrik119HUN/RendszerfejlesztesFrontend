@@ -32,7 +32,7 @@ export class RegistercompanyComponent {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       companyName: new FormControl('', [Validators.required]),
       postalCode: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),

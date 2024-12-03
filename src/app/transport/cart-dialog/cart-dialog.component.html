@@ -1,0 +1,40 @@
+<mat-dialog-content class="d-flex justify-content-center align-items-center">
+  <div class="container">
+    <table class="table table-striped table-bordered text-center">
+      <thead class="table-light">
+      <tr>
+        <th>Termék Név</th>
+        <th>Ár (Ft)</th>
+        <th>Darabszám</th>
+        <th>Műveletek</th>
+      </tr>
+      </thead>
+      <tbody>
+      @for(product of items; track $index){
+      <tr>
+        <td>{{ product.item.name }}</td>
+        <td>{{ product.item.price }}</td>
+        <td>
+          <input
+            type="number"
+            class="form-control w-auto mx-auto"
+            [(ngModel)]="product.quantity"
+            placeholder="0"
+          >
+        </td>
+        <td>
+          <button
+            mat-flat-button
+            color="primary"
+            class="btn btn-success"
+            (click)="productToCart(product)">
+            Kosárba
+          </button>
+        </td>
+      </tr>
+      }
+      </tbody>
+    </table>
+    <button (click)="closeDialog()" mat-flat-button color="primary" class="btn">Bezár</button>
+  </div>
+</mat-dialog-content>

@@ -7,27 +7,31 @@
         <form [formGroup]="userForm" (ngSubmit)="onSubmitUserForm()">
           <mat-form-field class="input">
             <mat-label>Vezetéknév</mat-label>
-            <input matInput formControlName="surName" type="text" />
-            @if(userForm.get('surName')?.hasError('required')) {
-            <mat-error> A vezetéknév megadása kötelező! </mat-error>
+            <input matInput formControlName="lastName" type="text" />
+            @if(userForm.get('lastName')?.hasError('required')) {
+              <mat-error> A vezetéknév megadása kötelező! </mat-error>
             }
+
           </mat-form-field>
           <mat-form-field class="input">
             <mat-label>Keresztnév</mat-label>
-            <input matInput formControlName="givenName" type="text" />
-            @if(userForm.get('givenName')?.hasError('required')) {
-            <mat-error> A keresztnév megadása kötelező! </mat-error>
+            <input matInput formControlName="firstName" type="text" />
+            @if(userForm.get('firstName')?.hasError('required')) {
+              <mat-error> A keresztnév megadása kötelező! </mat-error>
             }
+
           </mat-form-field>
 
           <mat-form-field class="input">
             <mat-label>E-mail</mat-label>
             <input matInput formControlName="email" type="email" />
-            @if (userForm.get('email')?.hasError('required')) {
-            <mat-error> Az e-mail cím megadása kötelező! </mat-error>
-            } @if(userForm.get('email')?.hasError('invalid')) {
-            <mat-error> Írjon be egy érvényes e-mail címet! </mat-error>
+            @if(userForm.get('email')?.hasError('required')) {
+              <mat-error> Az e-mail cím megadása kötelező! </mat-error>
             }
+            @if(userForm.get('email')?.hasError('email')) {
+              <mat-error> Írjon be egy érvényes e-mail címet! </mat-error>
+            }
+
           </mat-form-field>
 
           <button
@@ -39,26 +43,100 @@
             Felhasználói adatok mentése
           </button>
         </form>
+        @if(userSaveSuccess) {
+          <div class="success-message">
+            Az adatok sikeresen elmentve!
+          </div>
+        }
       </mat-tab>
 
       <mat-tab label="Cég adatai">
+        <mat-form-field class="w-100">
+          <mat-label>Válassz céget</mat-label>
+          <mat-select (selectionChange)="onSelectCompany($event.value)">
+            @for(company of companies; track company) {
+            <mat-option [value]="company.id">
+            {{ company.name }}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
         <form [formGroup]="companyForm" (ngSubmit)="onSubmitCompanyForm()">
-          <mat-form-field class="input">
+          <mat-form-field class="w-100">
             <mat-label>Cég neve</mat-label>
-            <input matInput formControlName="companyName" type="text" />
-            @if(companyForm.get('companyName')?.hasError('required')) {
-            <mat-error> A cég nevét kötelező megadni! </mat-error>
+            <input matInput formControlName="name" type="text" />
+            @if(companyForm.get('name')?.hasError('required')){
+            <mat-error>
+              A cég nevét kötelező megadni!
+            </mat-error>
             }
           </mat-form-field>
+          <div formGroupName="headquarter_address">
+            <div class="d-flex flex-wrap w-100">
+              <mat-form-field class="w-50 px-1">
+                <mat-label>Ország</mat-label>
+                <input matInput formControlName="country" type="text" />
+                @if(companyForm.get('headquarter_address.country')?.hasError('required')){
+                <mat-error>
+                  Az ország megadása kötelező!
+                </mat-error>
+                }
+              </mat-form-field>
 
-          <mat-form-field class="input">
-            <mat-label>Cím</mat-label>
-            <input matInput formControlName="address" type="text" />
-            @if(companyForm.get('address')?.hasError('required')) {
-            <mat-error> A cím megadása kötelező! </mat-error>
-            }
-          </mat-form-field>
+              <mat-form-field class="w-50 px-1">
+                <mat-label>Megye</mat-label>
+                <input matInput formControlName="province" type="text" />
+                @if(companyForm.get('headquarter_address.province')?.hasError('required')) {
+                <mat-error>
+                A megye megadása kötelező!
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="d-flex flex-wrap w-100">
+              <mat-form-field class="w-50 px-1">
+                <mat-label>Város</mat-label>
+                <input matInput formControlName="city" type="text" />
+                @if(companyForm.get('headquarter_address.city')?.hasError('required')) {
+                <mat-error>
+                  A város megadása kötelező!
+                </mat-error>
+                }
+              </mat-form-field>
 
+              <mat-form-field class="w-50 px-1">
+                <mat-label>Utca</mat-label>
+                <input matInput formControlName="street" type="text" />
+                @if(companyForm.get('headquarter_address.street')?.hasError('required')) {
+                <mat-error>
+                Az utca megadása kötelező!
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="d-flex flex-wrap w-100">
+              <mat-form-field class="w-50 px-1">
+                <mat-label>Házszám</mat-label>
+                <input matInput formControlName="number" type="number" />
+                @if(companyForm.get('headquarter_address.number')?.hasError('required')) {
+                <mat-error>
+                  A házszám megadása kötelező!
+                </mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field class="w-50 px-1">
+                <mat-label>Irányítószám</mat-label>
+                <input matInput formControlName="postalCode" type="number" />
+                @if(companyForm.get('headquarter_address.postalCode')?.hasError('required')) {
+                <mat-error>
+                  Az irányítószám megadása kötelező!
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
           <button
             mat-raised-button
             class="input"
@@ -68,6 +146,11 @@
             Cég adatainak mentése
           </button>
         </form>
+        @if(companySaveSuccess) {
+          <div  class="success-message">
+            Az adatok sikeresen elmentve!
+          </div>
+        }
       </mat-tab>
     </mat-tab-group>
   </div>

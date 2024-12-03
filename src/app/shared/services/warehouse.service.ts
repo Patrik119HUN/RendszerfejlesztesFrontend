@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IWarehouse } from '../../shared/model/warehouse';
+import { IWarehouse } from '../model/warehouse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,10 @@ export class WarehouseService {
   public constructor(private http: HttpClient) {}
 
   public getAllWarehouses(): Observable<IWarehouse[]> {
+    return this.http.get<IWarehouse[]>(this.apiUrl);
+  }
+
+  public getUserWarehouses(): Observable<IWarehouse[]>{
     return this.http.get<IWarehouse[]>(this.apiUrl+"/all");
   }
 

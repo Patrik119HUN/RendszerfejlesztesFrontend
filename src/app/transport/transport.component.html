@@ -1,3 +1,4 @@
+@if (userWarehouses$|async; as warehouses) {
 <div class="container">
   <div class="card">
     <button mat-icon-button class="arrowBack" (click)="goBack()">
@@ -5,109 +6,65 @@
     </button>
 
     <h3>Fuvarozás</h3>
-
     <mat-tab-group [(selectedIndex)]="tabIndex">
-      <mat-tab label="Kosár">
-        <div class="tab-content">
-          <h4>Kosár tartalma</h4>
-          @for (item of cartItems; track $index) {
-          <div class="cart-item">
-            <p>{{ item.name }} - {{ item.quantity }}</p>
-            <button mat-button color="primary" (click)="deleteItem(item)">
-              Törlés
-            </button>
-          </div>
-          }
-          <button class="gomb" mat-raised-button color="accent">
-            További termékek keresése
-          </button>
-        </div>
-      </mat-tab>
-
       <mat-tab label="Szállítási Adatok">
-        <form [formGroup]="deliveryForm" (ngSubmit)="onDeliverySubmit()">
+        <form [formGroup]="deliveryForm">
           <h4>Szállítási Adatok</h4>
           <div class="delivery-section">
             <div>
-              <h5>Honnan</h5>
               <mat-form-field class="input">
-                <mat-label>Város</mat-label>
-                <input matInput formControlName="fromCity" />
-              </mat-form-field>
-              <mat-form-field class="input">
-                <mat-label>Irányítószám</mat-label>
-                <input
-                  matInput
-                  formControlName="fromZip"
-                  type="number"
-                  min="1000"
-                  max="9999"
-                />
-              </mat-form-field>
-              <mat-form-field class="input">
-                <mat-label>Utca</mat-label>
-                <input matInput formControlName="fromStreet" />
-              </mat-form-field>
-              <mat-form-field class="input">
-                <mat-label>Házszám</mat-label>
-                <input
-                  matInput
-                  formControlName="fromHouseNumber"
-                  type="number"
-                  min="1"
-                  max="1000"
-                />
+                <mat-label>Küldő telephely</mat-label>
+                <mat-select formControlName="fromWarehouse">
+                  @for (warehouse of warehouses; track $index) {
+                  <mat-option [value]="warehouse.id">{{ warehouse.name }}</mat-option>
+                  }
+                </mat-select>
               </mat-form-field>
             </div>
 
             <mat-icon id="fromTo">arrow_forward</mat-icon>
 
             <div>
-              <h5>Hova</h5>
               <mat-form-field class="input">
-                <mat-label>Város</mat-label>
-                <input matInput formControlName="toCity" />
-              </mat-form-field>
-              <mat-form-field class="input">
-                <mat-label>Irányítószám</mat-label>
-                <input
-                  matInput
-                  formControlName="toZip"
-                  type="number"
-                  min="1000"
-                  max="9999"
-                />
-              </mat-form-field>
-              <mat-form-field class="input">
-                <mat-label>Utca</mat-label>
-                <input matInput formControlName="toStreet" />
-              </mat-form-field>
-              <mat-form-field class="input">
-                <mat-label>Házszám</mat-label>
-                <input
-                  matInput
-                  formControlName="toHouseNumber"
-                  type="number"
-                  min="1"
-                  max="1000"
-                />
+                <mat-label>Cél telephely</mat-label>
+                <mat-select formControlName="toWarehouse">
+                  @for (warehouse of warehouses; track $index) {
+                  <mat-option [value]="warehouse.id">{{ warehouse.name }}</mat-option>
+                  }
+                </mat-select>
               </mat-form-field>
             </div>
           </div>
         </form>
       </mat-tab>
 
+      <mat-tab label="Szállítmány hozzáadása">
+        <div class="tab-content">
+          <h4>Szállítmányok</h4>
+          @for (item of cartItems; track $index) {
+          <div class="cart-item">
+            <p>{{ item.name }} - {{ item.quantity }}</p>
+            <button mat-button color="primary" (click)="deleteItem(item)">Törlés</button>
+          </div>
+          }
+          <button class="gomb" mat-raised-button color="accent" (click)="openAddShipmentDialog()">
+            Szállítmány hozzáadása
+          </button>
+        </div>
+      </mat-tab>
+
       <mat-tab label="Véglegesítés">
         <div class="tab-content">
           <h4>Összegzés</h4>
           <p>Végső összeg: {{ totalAmount }}</p>
-          <button mat-raised-button color="primary">Fizetés</button>
+          <button (click)="onDeliverySubmit()" mat-raised-button color="primary">Szállítás</button>
         </div>
       </mat-tab>
     </mat-tab-group>
-
-    <button mat-raised-button color="primary" (click)="nextPage()">
-      Következő
-    </button>
+    @if(this.tabIndex < 2) {
+    <button mat-raised-button color="primary" (click)="nextPage()">Következő</button>
+    }
   </div>
 </div>
+
+}

@@ -1,5 +1,5 @@
 
-<h3>Telephelyek</h3>
+<h3 class="pl-5">Telephelyek</h3>
 
 
 <div class="warehouse-list">
@@ -11,6 +11,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="editWarehouse(warehouse)">Szerkesztés</button>
+        <button mat-menu-item (click)="listItems(warehouse)">Termékek listázása</button>
         <button mat-menu-item (click)="deleteWarehouse(warehouse)">Törlés</button>
       </mat-menu>
     </div>
