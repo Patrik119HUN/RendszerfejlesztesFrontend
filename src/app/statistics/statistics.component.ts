@@ -1,4 +1,3 @@
-import '@angular/core';
 import { Component } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatChip, MatChipSet, MatChipsModule } from '@angular/material/chips';
